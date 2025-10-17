@@ -1,9 +1,11 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   plugins: [
+    tailwindcss(),
     react(),
     VitePWA({
       registerType: "autoUpdate",
@@ -15,15 +17,15 @@ export default defineConfig({
         theme_color: "#ff1c1c",
         background_color: "#ffffff",
         display: "standalone",
-        start_url: "/",
+        start_url: "/", // ruta absoluta
         icons: [
           {
-            src: "pokeball.png",
+            src: "/pokeball.png", // ruta absoluta
             sizes: "192x192",
             type: "image/png"
           },
           {
-            src: "pokeball.png",
+            src: "/pokeball.png",
             sizes: "512x512",
             type: "image/png"
           }
@@ -51,5 +53,6 @@ export default defineConfig({
         ]
       }
     })
-  ]
+  ],
+  base: "/", // importante para Vercel
 });
