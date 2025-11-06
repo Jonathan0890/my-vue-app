@@ -9,25 +9,34 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["pokeball.png"],
+      includeAssets: ["favicon.svg", "pokeball.png", "Pokeball-192.png", "Pokeball-512.png"],
       manifest: {
         name: "PokéPWA",
         short_name: "PokéPWA",
         description: "Tu Pokédex Progresiva con React + Vite",
-        theme_color: "#ff1c1c",
+        theme_color: "#dc2626",
         background_color: "#ffffff",
         display: "standalone",
-        start_url: "/", // ruta absoluta
+        start_url: "/",
+        orientation: "portrait",
         icons: [
           {
-            src: "/pokeball.png", // ruta absoluta
-            sizes: "192x192",
-            type: "image/png"
+            src: "pokeball.png",
+            sizes: "64x64",
+            type: "image/png",
+            purpose: "any"
           },
           {
-            src: "/pokeball.png",
+            src: "Pokeball-192.png",
+            sizes: "192x192",
+            type: "image/png",
+            purpose: "any"
+          },
+          {
+            src: "Pokeball-512.png",
             sizes: "512x512",
-            type: "image/png"
+            type: "image/png",
+            purpose: "any"
           }
         ]
       },
@@ -42,8 +51,7 @@ export default defineConfig({
             }
           },
           {
-            urlPattern:
-              /^https:\/\/raw\.githubusercontent\.com\/PokeAPI\/sprites/,
+            urlPattern: /^https:\/\/raw\.githubusercontent\.com\/PokeAPI\/sprites/,
             handler: "CacheFirst",
             options: {
               cacheName: "pokemon-images-cache",
@@ -51,8 +59,11 @@ export default defineConfig({
             }
           }
         ]
+      },
+      devOptions: {
+        enabled: true
       }
     })
   ],
-  base: "/", // importante para Vercel
+  base: "/",
 });
